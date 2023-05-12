@@ -64,7 +64,7 @@ int main()
 	{
 		for (int j = 0; j < input[i].size(); ++j)
 		{
-			std::cout << input[i][j] << std::endl;
+			std::cout << input[i][j] << "\n";
 		}
 	}
  
