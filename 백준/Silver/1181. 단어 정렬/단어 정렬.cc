@@ -22,10 +22,6 @@ bool Compare(string _first, string _second)
 
 int main()
 {
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	cout.tie(0);
-
 	vector<string> input[51];
 
 	int n;
@@ -46,7 +42,7 @@ int main()
 
 	for (int i = 1; i <= 50; ++i)
 	{
-		vector<string>::iterator iter;
+		/*vector<string>::iterator iter;
 
 		for (iter = input[i].begin(); iter != input[i].end(); )
 		{
@@ -60,7 +56,9 @@ int main()
 				buffer = *iter;
 				iter++;
 			}
-		}
+		}*/
+
+		input[i].erase(unique(input[i].begin(), input[i].end()), input[i].end());
 	}
 
 
