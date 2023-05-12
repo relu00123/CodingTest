@@ -2,7 +2,7 @@
 
 using namespace std;
 
-bool Compare(string _first, string _second)
+bool Compare(const string &_first, const string &_second)
 {
 	for (int i = 0; i < _first.size(); ++i)
 	{
@@ -47,6 +47,8 @@ int main()
 
 	for (int i = 1; i <= 50; ++i)
 	{
+
+		// 내가 쓴 방법!
 		/*vector<string>::iterator iter;
 
 		for (iter = input[i].begin(); iter != input[i].end(); )
@@ -63,6 +65,7 @@ int main()
 			}
 		}*/
 
+		// 더 좋은 방법!
 		input[i].erase(unique(input[i].begin(), input[i].end()), input[i].end());
 	}
 
@@ -75,7 +78,5 @@ int main()
 		}
 	}
  
-
 	return 0;
-
 }
