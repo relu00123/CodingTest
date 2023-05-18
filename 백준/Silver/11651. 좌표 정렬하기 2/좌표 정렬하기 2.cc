@@ -2,7 +2,7 @@
 
 using namespace std;
 
-bool compare(const pair<int, int>&  _First, const pair<int, int>& _Second)
+bool compare(  pair<int, int>  _First,   pair<int, int> _Second)
 {
 	 //y좌표가 같지 않은경우 먼저 정렬의 기준이 된다.
 	if (_First.second != _Second.second)
