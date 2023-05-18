@@ -21,6 +21,8 @@ bool compare(const pair<int, int>&  _First, const pair<int, int>& _Second)
 
 int main()
 {
+	ios::sync_with_stdio(0);
+	cin.tie(nullptr);
 	int N;
 	int x, y;
 	std::cin >> N;
