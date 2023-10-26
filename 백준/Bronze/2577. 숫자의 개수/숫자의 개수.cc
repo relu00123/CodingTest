@@ -1,34 +1,29 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 int main()
 {
-	int num_count[10] = { 0 };
+	int a, b, c;
 
-	int first;
-	int second;
-	int third;
-	int total;
+	std::cin >> a;
+	cin >> b;
+	cin >> c;
 
-	std::cin >> first;
-	std::cin >> second;
-	std::cin >> third;
+	int result = a * b * c;
 
-	total = first * second * third;
+	int arr[10] = { 0 ,};
 
-	while (total / 10 != 0)
+	while (result)
 	{
-		num_count[total % 10] += 1;
-		total = total / 10;
+		int number = result % 10;
+
+		arr[number] += 1;
+
+		result /= 10;
 	}
 
-	num_count[total] += 1;
-
-	for (int i = 0; i <= 9; ++i)
-	{
-		std::cout << num_count[i] << std::endl;
-	}
+	for (int& element : arr)
+		cout << element << "\n";
 
 	return 0;
 }
