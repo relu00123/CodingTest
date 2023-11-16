@@ -1,34 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+int a[20001];
 int main(void){
   ios::sync_with_stdio(0);
   cin.tie(0);
-  int t;
-  cin >> t;
-  while(t--){
-    int n, m;
-    cin >> n >> m;
-    vector<pair<int,int>> v(n+m);
-    for(int i = 0; i < n; i++){
-      int a;
-      cin >> a;
-      v[i] = {a, 0};
-    }
-    for(int i = n; i < n+m; i++){
-      int b;
-      cin >> b;
-      v[i] = {b, 1};
-    }
-    sort(v.begin(), v.end());
-    int cnt = 0; // 현재까지 나온 b의 개수
+  int T;cin>>T;
+  while(T--){
+    int n,m;cin>>n>>m;
+    for(int i=0;i<n;++i) cin>>a[i];
+    sort(a, a+n);
     int ans = 0;
-    for(int i = 0; i < n+m; i++){
-      if(v[i].second == 0) // 현재 보는 수가 A에 속한 수
-        ans += cnt;
-      else // 현재 보는 수가 B에 속한 수
-        cnt++;
+    for(int i=0;i<m;++i){
+      int num;cin>>num;
+      int index = upper_bound(a, a+n, num) - a;
+      ans += n - index;
     }
-    cout << ans << '\n';
+    cout<<ans<<'\n';
   }
 }
