@@ -1,76 +1,58 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
-
-int main()
+int main(void)
 {
-	int n;
-	std::cin >> n;
-	//cin.ignore();
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-	vector<list<char>> pwd(n);
+	
+	int t; cin >> t;
 
-
-	for (int i = 0; i < n; ++i)
+	while (t--)
 	{
-		pwd[i].clear();
+		string input; cin >> input;
 
+		list<char> answer;
 
-		string input;
-		cin >> input;
+		list<char>::iterator iter = answer.begin();
 
-
-		list<char>::iterator it;
-		it = pwd[i].begin();
-
-
-		for (auto j : input)
+		for (char cur : input)
 		{
-			char cur_char = j;
-
-			switch (cur_char)
+			if (cur == '<')
 			{
-			case '-':
-			{
-				if (it != pwd[i].begin())
-				{ 
-					it--;
-					it = pwd[i].erase(it);
+				if (iter != answer.begin())
+					iter--;
+			}
 
-			 
+			else if (cur == '>')
+			{
+				if (iter != answer.end())
+					iter++;
+			}
+
+			else if (cur == '-')
+			{
+				if (iter != answer.begin())
+				{
+					iter--;
+					iter = answer.erase(iter);
 				}
 			}
-			break;
-			case '>':
+
+			else
 			{
-				if (it != pwd[i].end())
-					it++;
-			}
-			break;
-			case '<':
-			{
-				if (it != pwd[i].begin())
-					it--;
-			}
-			break;
-			default:
-			{
-				pwd[i].insert(it, cur_char);
-		
-			}
-				break;
+				answer.insert(iter, cur);
 			}
 		}
-	}
 
-	for (int i = 0; i < pwd.size(); ++i)
-	{
-		for (auto character : pwd[i])
-			cout << character;
+		for (char e : answer)
+			cout << e;
 
 		cout << "\n";
 	}
+
+ 
 
 
 	return 0;
