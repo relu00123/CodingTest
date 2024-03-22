@@ -6,78 +6,57 @@ int main()
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
-	int ans = 0;
+	// 괄호를 적절히 쳐서 식의 값을 최소로 만드는 프로그램을 작성하시오 
 
-
-	string input;
-	cin >> input;
-
-	int arr[50] = { 0, };
-
+	string input; cin >> input; 
+	int  ans = 0;
 
 	int temp = 0;
-	int index = 0;
-	bool isminus = false;
+	bool isminusactivated = false; 
+	bool nonzerodetected = false;
 	for (int i = 0; i < input.size(); ++i)
 	{
-		if (input[i] == '+')
+		if (input[i] == '-')
 		{
-			isminus == false ? arr[index] = temp : arr[index] = -temp;
+			if (isminusactivated)
+				ans += (-temp);
+			else
+				ans += temp;
+
 			temp = 0;
-			index++;
-			isminus = false;
+			nonzerodetected = false;
+			isminusactivated = true;
 		}
-		else if (input[i] == '-')
+		else if ( input[i] == '+')
 		{
-			isminus == false ? arr[index] = temp : arr[index] = -temp;
-			temp = 0;
-			index++;
-			isminus = true;
+			if (isminusactivated)
+				ans += (-temp);
+			else
+				ans += temp;
+
+			temp = 0; 
+			nonzerodetected = false;
 		}
-		else if (i == input.size() - 1)
+		else
 		{
-			if (isminus == false)
+			if (input[i] == '0' && nonzerodetected == false) continue;
+			else
 			{
-				arr[index] = temp * 10 +(input[i] - '0');
+				nonzerodetected = true;
+				temp *= 10;
+				temp += (int)(input[i] - '0');
 			}
-			else if (isminus == true)
-			{
-				arr[index] =  - (temp * 10 + (input[i] - '0'));
-			} 
-		}
-		else
-		{
-			temp = temp * 10 + (input[i] - '0');
 		}
 	}
 
-	/*for (int i = 0; i <= index; ++i)
-	{
-		cout << arr[i] << " ";
-	}*/
+	if (isminusactivated)
+		ans += (-temp);
+	else
+		ans += temp;
 
 
 
-	int answer = 0;
+	cout << ans << "\n";
 
-	bool isMinusturned = false;
-	for (int i = 0; i <= index; ++i)
-	{
-		if (arr[i] < 0)
-			isMinusturned = true;
-
-
-		if (isMinusturned == false)
-		{
-			answer += arr[i];
-		}
-		else
-		{
-			answer -= abs(arr[i]);
-		}
-	}
-
-	cout << answer;
-
-	return 0; 
+	return 0;
 }
