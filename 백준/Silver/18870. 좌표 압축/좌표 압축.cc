@@ -19,17 +19,10 @@ int main()
 	sort(arr.begin(), arr.end());
 	arr.erase(unique(arr.begin(), arr.end()), arr.end());
 
-	map<int, int> answer;
-	int idx = 0;
-	
-	for (int i = 0; i < arr.size(); ++i)
-	{
-		answer[arr[i]] = idx;
-		idx++;
-	}
+	 
 
 
 	for (int e : original) {
-		cout << answer[e] << " ";
+		cout << lower_bound(arr.begin(), arr.end(), e) - arr.begin() << " ";
 	}
 }
