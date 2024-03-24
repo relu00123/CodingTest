@@ -6,50 +6,47 @@ int main()
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
+	int  n; cin >> n;
 
-	int x;
+	int x = 1;
+	while (x * (x + 1) / 2 < n)
+		x++;
+ 
+	n = n - ((x - 1) * x / 2);
+	 
+	bool toggle = true;
 
-	cin >> x;
+	x % 2 == 0 ? toggle = true : toggle = false;
 
-	int cur_row = 1;
-	int cur_col;
+	int up, down;
 
-	while (true)
+	if (toggle == true)
 	{
-		if (x - cur_row > 0)
+		up = 1; down = x;
+
+		while (up != n)
 		{
-			x -= cur_row;
-			cur_row++;
+			up += 1;
+			down -= 1;
 		}
+	}
 
-		else
+	else  if (toggle == false)
+	{
+		up = x; down = 1;
+
+		while (down != n)
 		{
-			cur_col = x;
-			break;
+			down += 1;
+			up -= 1;
 		}
 	}
 
-	int first;
-	int second;
+	 
+	cout << up << "/" << down << "\n";
+	 
 
 
-	if (cur_row % 2 == 1)
-	{
-		// 분자는 작아지고 분모는 커진다.
-		first = cur_row - cur_col + 1;
-		second = cur_col;
-	}
-
-	else
-	{
-		// 분모는 작아지고 분자는 커진다
-		first = cur_col;
-		second = cur_row - cur_col + 1;
-	}
-
-
-
-	cout << first << "/" << second;
 
 	return 0;
 }
