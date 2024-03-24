@@ -1,52 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main()
-{
-	ios::sync_with_stdio(0);
-	cin.tie(0);
+int main() {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
 
-	int  n; cin >> n;
+  int x;
+  cin >> x;
 
-	int x = 1;
-	while (x * (x + 1) / 2 < n)
-		x++;
- 
-	n = n - ((x - 1) * x / 2);
-	 
-	bool toggle = true;
+  // x에서 1 2 3 ...을 빼다보면 찾는 수가 i 번째 군의 x 번째 수가 된다.
+  int i = 1;
+  while (x > i) {
+    x -= i;
+    i++;
+  }
 
-	x % 2 == 0 ? toggle = true : toggle = false;
-
-	int up, down;
-
-	if (toggle == true)
-	{
-		up = 1; down = x;
-
-		while (up != n)
-		{
-			up += 1;
-			down -= 1;
-		}
-	}
-
-	else  if (toggle == false)
-	{
-		up = x; down = 1;
-
-		while (down != n)
-		{
-			down += 1;
-			up -= 1;
-		}
-	}
-
-	 
-	cout << up << "/" << down << "\n";
-	 
-
-
-
-	return 0;
+  int nume = x;
+  int deno = i + 1 - x;
+  if (i % 2) swap(nume, deno);  // 홀수 번째 군의 순서가 문제와 반대이므로 뒤집는다.
+  cout << nume << '/' << deno;
 }
