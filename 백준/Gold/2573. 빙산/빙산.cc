@@ -73,16 +73,6 @@ int main() {
 				graph[i][j] = copy_graph[i][j];
 		}
 
-
-
-		//cout << "\n======Debugging Graph=========\n";
-		//for (int i = 0; i < n; ++i) {
-		//	for (int j = 0; j < m; ++j) {
-		//		cout << graph[i][j] << " ";
-		//	}
-		//	cout << "\n";
-		//}
-
 		if (seperateicecount >= 2) {
 			cout << passed_time << "\n";
 			return 0;
@@ -94,16 +84,6 @@ int main() {
 		}
 
 		passed_time += 1;
-		 
 	}
-
-
-
-
-
-
-
-
-
 	return 0;
 }
