@@ -1,135 +1,103 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main()
-{
+deque<int> calc(int cnt, string ar) {
+
+	deque<int> q;
+
+	if (ar.size() == 0)
+		return q;
+
+	int num = -1;
+	for (int i = 1; i < ar.size() - 1; ++i) {
+		if (ar[i] == ',') {
+			q.push_back(num);
+			num = -1;
+		}
+		else {
+			if (num == -1)
+				num = (int)(ar[i] - '0');
+			else {
+				num *= 10;
+				num += (int)(ar[i] - '0');
+			}
+		}
+	}
+
+	if (num != -1)
+		q.push_back(num);
+
+	return q;
+}
+
+int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
-	int T;
-	cin >> T;
+	// R : 배열에 있는 수의 순서를 뒤집는다.
+	// D : 첫번째 수를 버리는 함수이다.  배열이 비어있는데 D를 사용한 경우에는 에러가 발생한다. 
 
-	while (T--)
-	{
-		string command;
-		cin >> command;
+	int t; cin >> t; // t는 최대 100개
 
-		int arrNum = 0;
-		cin >> arrNum;
+	while (t--) {
+		string order; cin >> order;
 
-		string arrInput;
-		cin >> arrInput;
-	
-		deque<int> arr = {};
+		int n; cin >> n;
 
-		int index = 0;
+		// [a,b,c,d, ...] 와 같은 형식으로 배열의 input이 주어진다.
+		string arr; cin >> arr;
+		 
+		deque<int> q = calc(n, arr);
 
-		string temp = "";
+		bool iserror = false;
+		bool ispopfront = true;
+		for (int i = 0; i < order.size(); ++i) {
+			if (order[i] == 'R') {
+				ispopfront = !ispopfront;
+			}
 
-		if (arrNum != 0)
-		{
-
-			while (index != arrInput.size())
-			{
-				if (arrInput[index] == '[')
-				{
-					index += 1;
-					continue;
-				}
-				else if (arrInput[index] == ',')
-				{
-					int result = atoi(temp.c_str());
-					arr.push_back(result);
-					temp = "";
-					index++;
-				}
-				else if (arrInput[index] == ']')
-				{
-					int result = atoi(temp.c_str());
-					arr.push_back(result);
-					temp = "";
-					index++;
+			else if (order[i] == 'D') {
+				if (q.empty()) {
+					cout << "error" << "\n";
+					iserror = true;
+					break;
 				}
 
-				else
-				{
-					temp.push_back(arrInput[index]);
-					index++;
+				else {
+					if (ispopfront)
+						q.pop_front();
+					else
+						q.pop_back();
 				}
 			}
 		}
 
 		// 출력
-		/*for (auto iter = arr.begin(); iter != arr.end(); ++iter)
-		{
-			cout << *iter << " ";
-		}*/
+		if (iserror == false) {
+			cout << "[";
+			if (ispopfront) {
+				while (!q.empty()) {
+					cout << q.front();
+					q.pop_front();
 
-		bool IsBegin = true;
-		bool IsError = false;
-
-
-		for (int i = 0; i < command.size(); ++i)
-		{
-			if (command[i] == 'R')
-			{
-				if (IsBegin == true)
-					IsBegin = false;
-				else
-					IsBegin = true;
-			}
-			else if (command[i] == 'D')
-			{
-				if (arr.size() == 0)
-				{
-					IsError = true;
-					cout << "error\n";
-					break;
-				}
-				if (IsBegin)
-					arr.pop_front();
-				else
-					arr.pop_back();
-			}
-		}
-
-		if (IsError)
-			continue;
-
-		cout << "[";
-
-		if (IsBegin)
-		{
-			for (auto iter = arr.begin(); iter != arr.end(); ++iter)
-			{
-				if (iter == arr.end() - 1)
-					cout << *iter;
-
-				else
-				{
-					cout << *iter << ",";
+					if (!q.empty())
+						cout << ",";
 				}
 			}
-		}
+			else {
+				while (!q.empty()) {
+					cout << q.back();
+					q.pop_back();
 
-		else
-		{
-			for (auto iter = arr.rbegin(); iter != arr.rend(); ++iter)
-			{
-				if (iter == arr.rend() - 1)
-					cout << *iter;
-
-				else
-				{
-					cout << *iter << ",";
+					if (!q.empty())
+						cout << ",";
 				}
 			}
+			cout << "]";
+			cout << "\n";
 		}
-
-		 
-
-
-		cout << "]\n";
-			
 	}
+
+
+	return 0;
 }
