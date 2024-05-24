@@ -110,23 +110,8 @@ int main() {
 			calc(i, w - 1, map, posesskeys, isvisit, locked, q, ans);
 		}
 		
-		// Step2. 
-		// BFS를 이용해서 문들을 연다. 
-		// 우선 지금 잠긴 잠겨서 못가는 곳들 중에서 갈 수 있는 곳이 있는지 확인 
-		//for (auto iter = posesskeys.begin(); iter != posesskeys.end(); ) {
-		//	char curkey = *iter;
-		//	if (locked.find(curkey) != locked.end()) {
-		//		for (pair<int, int>& e : locked[curkey]) {
-		//			if (isvisit[e.first][e.second] != false)  continue;
-		//			isvisit[e.first][e.second] = true;
-		//			q.push({ e.first, e.second });
-		//		}
-		//		iter = posesskeys.erase(iter);
-		//	}
-		//	else
-		//		iter++;
-		//}
-
+		// Step2.
+		// BFS로 갈 수 있는 곳 방문
 		while (!q.empty()) {
 			auto [cur_x, cur_y] = q.front(); q.pop();
 			for (int dir = 0; dir < 4; ++dir) {
