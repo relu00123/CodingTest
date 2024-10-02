@@ -1,44 +1,38 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main(void)
+int main()
 {
-	int n;
+	ios::sync_with_stdio(0);
+	cin.tie();
 
-	cin >> n;
+	int n; cin >> n;
 
-	int arr[10] = {};
+	vector<int> arr(9);
 
-	while (n)
+	while (n != 0)
 	{
-		arr[n % 10] += 1;
+		int left = n % 10;
+		
+		if (left == 9)
+			arr[6]++;
+		else
+		{
+			arr[left]++;
+		}
+
 		n /= 10;
 	}
 
-	int special_case = arr[6] + arr[9];
-
-	// 짝수인경우
-	if (special_case % 2)
-	{
-		arr[6] = special_case / 2 + 1;
-		arr[9] = special_case / 2;
-	}
+	if (arr[6] % 2 == 1)
+		arr[6] = arr[6] / 2 + 1;
 	else
-	{
-		arr[6] = special_case / 2;
-		arr[9] = special_case / 2;
-	}
+		arr[6] = arr[6] / 2;
 
-	int max = 0;
+	cout << *max_element(arr.begin(), arr.end()) << "\n";
 
-	for (int i = 0; i <= 9; ++i)
 
-	{
-		if (arr[i] > max)
-			max = arr[i];
-	}
+ 
 
-	cout << max << "\n";
-
-	return 0;
+	return 0; 
 }
