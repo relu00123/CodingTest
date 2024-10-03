@@ -3,80 +3,44 @@ using namespace std;
 
 int main()
 {
-	ios::sync_with_stdio(0);
 	cin.tie(0);
+	ios::sync_with_stdio(0);
 
+
+	deque<int> q; 
 	int n, m; cin >> n >> m;
 
-	deque<int> dq;
-
 	for (int i = 1; i <= n; ++i)
-	{
-		dq.push_back(i);
-	}
-
-	auto iter = dq.begin();
+		q.push_back(i);
 
 	int ans = 0;
 
 	while (m--)
 	{
-		int target; cin >> target;
+		int temp; cin >> temp;
 
-		auto plus_iter = iter;
-		auto minus_iter = iter;
-		int plus_cnt = 0;
-		int minus_cnt = 0;
+		int front_cnt = 0;
 
-		while (*plus_iter != target)
+		while (temp != q.front())
 		{
-			plus_cnt++;
+			int cur = q.front();
+			q.pop_front();
+			q.push_back(cur);
 
-			if (plus_iter == dq.end())
-				plus_iter = dq.begin();
-
-			plus_iter++;
-			if (plus_iter == dq.end())
-				plus_iter = dq.begin();
+			front_cnt += 1;
 		}
 
-		while (*minus_iter != target)
-		{
-			minus_cnt++;
-			 
-			if (minus_iter == dq.begin())
-			{
-				minus_iter = dq.end() - 1;
-			}
-			else
-			{
-				minus_iter--;
-			}
-		}
-
-
-		if (minus_cnt < plus_cnt)
-		{
-			// minus로 가야함 
-			ans += minus_cnt;
-			//iter = minus_iter;
-			iter = dq.erase(minus_iter);
-			if (iter == dq.end())
-				iter = dq.begin();
-		}
-
+		if (q.size() - front_cnt > front_cnt)
+			ans += front_cnt;
 		else
-		{
-			ans += plus_cnt;
-			iter = dq.erase(plus_iter);
-			if (iter == dq.end())
-				iter = dq.begin();
-		}
+			ans += (q.size() - front_cnt);
 
-
+		// 해당하는 숫자 제거
+		q.pop_front();
 	}
 
 	cout << ans << "\n";
 
 	return 0;
+
 }
